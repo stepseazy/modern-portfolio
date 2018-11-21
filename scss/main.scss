@@ -1,6 +1,5 @@
 @import 'config';
 @import 'menu';
-@import 'mobile';
 
 
 * {
@@ -10,10 +9,12 @@
 body {
     @include background();
     background: $primary-color;
+    color: set-text-color($primary-color);
     height: 100%;
     margin: 0;
     font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.5;
+
 }
 
 h1,
@@ -50,7 +51,8 @@ header {
 
 main {
     padding: 4rem;
-    height: 100%;
+    // height: 100%;
+    min-height: calc(100vh - 60px);
 
     .icons {
         margin-top: 1rem;
@@ -74,95 +76,62 @@ main {
     }
 }
 
-.menu {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    opacity: 0.9;
-    visibility: hidden;
-
-    &.show {
-        visibility: visible;
-    }
-
-    &-branding,
-    &-nav {
-        display: flex;
-        flex-flow: column wrap;
-        align-items: center;
-        justify-content: center;
-        float: left;
-        width: 50%;
-        height: 100vh;
-        overflow: hidden;
-    }
-
-    &-nav {
-        margin: 0;
-        padding: 0;
-        background: darken($primary-color, 5);
-        list-style: none;
-        transform: translate3d(0, -100%, 0);
-        @include easeOut;
-
-        &.show {
-            transform: translate3d(0, 0, 0);
-
-        }
-    }
-
-    &-branding {
-        background: darken($primary-color, 5);
-        transform: translate3d(0, 100%, 0);
-        @include easeOut;
-
-        &.show {
-            transform: translate3d(0, 0, 0);
-        }
-
-        .portrait {
-            width: 250px;
-            height: 250px;
-            background: url('../img/portrait.jpg');
-            background-size: cover;
-            border-radius: 50%;
-            border: solid 3px $secondary-color;
-        }
-    }
-
-    .nav-item {
-        transform: translate3d(600px, 0, 0);
-        @include easeOut;
-
-        &.show {
-            transform: translate3d(0, 0, 0);
-
-        }
-
-        &.current>a {
-            color: $secondary-color;
-        }
-    }
-
-    .nav-link {
-        display: inline-block;
-        position: relative;
-        font-size: 2rem;
-        text-transform: uppercase;
-        padding: 1rem 0;
-        font-weight: 300;
-        color: #fff;
-        text-decoration: none;
-        @include easeOut;
-
-        &:hover {
-            color: $secondary-color;
-        }
-    }
-}
-
 @for $x from 1 through 4 {
     .nav-item:nth-child(#{$x}) {
         transition-delay: $x*0.1s;
     }
 }
+
+
+.about-info {
+    display: grid;
+    grid-template-areas:
+        'bioimage bio bio'
+        'job1 job2 job3';
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+
+    .bio-image {
+        grid-area: bioimage;
+        border-radius: 50%;
+        margin: auto;
+        border: $secondary-color 3px solid;
+    }
+
+    .bio {
+        grid-area: bio;
+    }
+
+    .job-1 {
+        grid-area: job1;
+    }
+
+    .job-2 {
+        grid-area: job2;
+    }
+
+    .job-3 {
+        grid-area: job3;
+    }
+
+    .job {
+        background: lighten($primary-color, 5);
+        padding: 0.5rem;
+        border-bottom: 5px solid $secondary-color;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+#main-footer {
+    text-align: center;
+    padding: 1rem;
+    background: darken($primary-color, 10);
+    color: set-text-color($primary-color);
+    height: 60px;
+}
+
+@import 'mobile';
